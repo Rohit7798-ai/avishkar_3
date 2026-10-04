@@ -48,9 +48,14 @@ class Settings(BaseSettings):
     OPEN_METEO_BASE_URL: str = "https://api.open-meteo.com/v1"
     OPEN_METEO_TIMEOUT_SECONDS: float = 10.0
 
+    # External Market Provider (Government of India Open Government Data - data.gov.in)
     OGD_MANDI_API_URL: str = "https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070"
     OGD_API_KEY: Union[str, None] = None
     OGD_TIMEOUT_SECONDS: float = 10.0
+
+    # Google Gemini LLM API Configuration
+    GEMINI_API_KEY: Union[str, None] = None
+    GEMINI_MODEL: str = "gemini-1.5-flash"
 
     model_config = SettingsConfigDict(
         env_file=".env",

@@ -504,6 +504,7 @@ export function Farms() {
           <Button
             variant="primary"
             size="sm"
+            data-tour="add-farm-btn"
             onClick={handleOpenAddFarm}
             className="bg-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-1.5 shadow-xs"
           >
@@ -975,6 +976,7 @@ export function Farms() {
                 <Button
                   type="button"
                   variant="outline"
+                  data-tour="detect-location-btn"
                   onClick={handleDetectLocation}
                   disabled={isDetectingLocation}
                   className="w-full flex items-center justify-center gap-2 py-3 border-2 border-emerald-600 bg-emerald-50/50 text-emerald-800 hover:bg-emerald-100 font-semibold text-sm rounded-xl transition-all shadow-xs cursor-pointer"

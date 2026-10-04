@@ -27,8 +27,23 @@ export function Header({ onMenuClick }) {
         </div>
       </div>
 
-      {/* Right controls: Only alert when service is disconnected to avoid distracting users */}
+      {/* Right controls: Help button & service indicator */}
       <div className="flex items-center gap-3">
+        <button
+          type="button"
+          onClick={() => {
+            window.dispatchEvent(
+              new CustomEvent('open-farm-copilot', { detail: { mode: 'help' } })
+            );
+          }}
+          data-tour="ask-ai-help"
+          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-full transition-all duration-150 shadow-xs active:scale-95"
+          aria-label="Ask AI / Help"
+        >
+          <span className="text-sm">🤖</span>
+          <span>Ask AI / मदत</span>
+        </button>
+
         {!loading && !isHealthy && (
           <Badge variant="warning" dot>
             Offline Mode

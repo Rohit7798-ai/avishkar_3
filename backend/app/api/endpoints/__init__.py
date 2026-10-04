@@ -2,7 +2,7 @@
 API Endpoints Package.
 """
 
-from app.api.endpoints import health, farmers, farms, crops, crop_observations, weather_observations, market_observations, indicators, decisions, sync, predictions, explanations, recommendations, validation, observation_reminders
+from app.api.endpoints import health, farmers, farms, crops, crop_observations, weather_observations, market_observations, indicators, decisions, sync, predictions, explanations, recommendations, validation, observation_reminders, chat
 
 __all__ = [
     "health",
@@ -20,4 +20,6 @@ __all__ = [
     "recommendations",
     "validation",
     "observation_reminders",
+    "chat",
 ]
+

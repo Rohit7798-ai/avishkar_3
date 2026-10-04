@@ -188,6 +188,24 @@ export function Crops() {
     loadData();
   }, [loadData]);
 
+  // Listen for Copilot Assistant modal triggers (e.g. Add Crop, Log Observation, Check Health)
+  useEffect(() => {
+    const handleCopilotModal = (e) => {
+      const { modal, crop_id } = e.detail || {};
+      if (modal === 'add_crop') {
+        handleOpenAddCrop();
+      } else if (modal === 'crop_observation') {
+        const target = (crop_id && crops.find((c) => c.id === crop_id)) || crops[0];
+        if (target) handleOpenObservations(target);
+      } else if (modal === 'recommendation') {
+        const target = (crop_id && crops.find((c) => c.id === crop_id)) || crops[0];
+        if (target) handleOpenRecommendation(target);
+      }
+    };
+    window.addEventListener('open-crop-modal', handleCopilotModal);
+    return () => window.removeEventListener('open-crop-modal', handleCopilotModal);
+  }, [crops]);
+
   // Load observations, indicators, and decision assessment when active crop modal opens
   const loadObservations = useCallback(async (cropId) => {
     setIsLoadingObs(true);
@@ -628,7 +646,7 @@ export function Crops() {
       title="Crops"
       subtitle="Track active crop cycles, sowing dates, and field observations"
       action={
-        <Button variant="primary" onClick={handleOpenAddCrop}>
+        <Button variant="primary" data-tour="add-crop-btn" onClick={handleOpenAddCrop}>
           + Add Crop
         </Button>
       }
@@ -713,8 +731,8 @@ export function Crops() {
       {/* Crop Cards List */}
       {!isLoading && crops.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {crops.map((crop) => (
-            <Card key={crop.id} className="flex flex-col justify-between">
+          {crops.map((crop, idx) => (
+            <Card key={crop.id} data-tour={idx === 0 ? "crop-card" : undefined} className="flex flex-col justify-between">
               <CardHeader>
                 <div>
                   <CardTitle>{crop.crop_name}</CardTitle>
@@ -905,6 +923,7 @@ export function Crops() {
                   <Button
                     variant="outline"
                     size="sm"
+                    data-tour={idx === 0 ? "log-observation-btn" : undefined}
                     onClick={() => handleOpenObservations(crop)}
                   >
                     📋 Observations
@@ -919,6 +938,7 @@ export function Crops() {
                   <Button
                     variant="primary"
                     size="sm"
+                    data-tour={idx === 0 ? "crop-health-btn" : undefined}
                     className="bg-emerald-600 hover:bg-emerald-700 text-white"
                     onClick={() => handleOpenRecommendation(crop)}
                   >

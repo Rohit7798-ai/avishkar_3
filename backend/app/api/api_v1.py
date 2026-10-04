@@ -4,7 +4,7 @@ Mounts root operational endpoints (health) and versioned v1 CRUD routes.
 """
 
 from fastapi import APIRouter
-from app.api.endpoints import health, farmers, farms, crops, crop_observations, weather_observations, market_observations, indicators, decisions, sync, predictions, explanations, recommendations, validation, observation_reminders
+from app.api.endpoints import health, farmers, farms, crops, crop_observations, weather_observations, market_observations, indicators, decisions, sync, predictions, explanations, recommendations, validation, observation_reminders, chat
 
 api_router = APIRouter()
 
@@ -27,5 +27,7 @@ v1_router.include_router(explanations.router)
 v1_router.include_router(recommendations.router)
 v1_router.include_router(validation.router)
 v1_router.include_router(observation_reminders.router)
+v1_router.include_router(chat.router)
 
 api_router.include_router(v1_router)
+

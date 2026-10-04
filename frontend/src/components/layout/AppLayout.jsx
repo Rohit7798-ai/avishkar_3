@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { Header } from './Header';
+import { FarmCopilotDrawer } from '../chat/FarmCopilotDrawer';
 
 export function AppLayout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -25,6 +26,9 @@ export function AppLayout() {
         <footer className="py-4 px-6 border-t border-slate-200/80 bg-white text-center text-xs text-slate-400">
           Farmer Decision Support System
         </footer>
+
+        {/* Global Kisan AI Copilot */}
+        <FarmCopilotDrawer />
       </div>
     </div>
   );
